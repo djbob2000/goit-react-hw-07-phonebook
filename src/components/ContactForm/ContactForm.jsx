@@ -3,11 +3,11 @@ import css from './ContactForm.module.css';
 import { addContactToStore } from '../../redux/contacts/contacts.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { getContacts } from '../../redux/contacts/contacts.selector';
+import { selectContacts } from '../../redux/selectors';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const [name, setName] = useState(
     () => JSON.parse(localStorage.getItem('name')) ?? ''

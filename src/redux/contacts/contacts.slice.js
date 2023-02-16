@@ -1,6 +1,10 @@
 import { contactsInitState } from './contacts.init-state';
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, getContacts } from './contacts.thunk';
+import {
+  addContact,
+  deleteContactFromStore,
+  getContacts,
+} from './contacts.thunk';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -21,7 +25,6 @@ const contactsSlice = createSlice({
         state.error = payload;
       })
 
-
       .addCase(addContact.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.items.push(payload);
@@ -31,13 +34,12 @@ const contactsSlice = createSlice({
         state.error = payload;
       })
 
-      
-      .addCase(deleteContact.fulfilled, (state, { payload }) => {
+      .addCase(deleteContactFromStore.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.items = state.items.filter(({ id }) => id !== payload);
       })
-      .addCase(deleteContact.rejected, (state, { payload }) => {
+      .addCase(deleteContactFromStore.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

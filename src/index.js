@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-const filterSlice = createSlice({
-  name: 'filter',
-  initialState: '',
-  reducers: {
-    setFilter: {
-      reducer(state, action) {
-        return (state = action.payload);
-      },
-    },
-  },
-});
+import { store } from 'redux/store';
 
-export const filterReducer = filterSlice.reducer;
-export const { setFilter } = filterSlice.actions;
+import './index.css';
+import App from 'components/App';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
