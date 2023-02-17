@@ -3,7 +3,7 @@ import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from '../../redux/selectors';
-import { addContactToStore } from 'redux/contacts/contacts.thunk';
+import { addContactToStore } from '../../redux/contacts/contacts.thunk';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -12,8 +12,8 @@ const ContactForm = () => {
   const [name, setName] = useState(
     () => JSON.parse(localStorage.getItem('name')) ?? ''
   );
-  const [number, setNumber] = useState(
-    () => JSON.parse(localStorage.getItem('number')) ?? ''
+  const [phone, setphone] = useState(
+    () => JSON.parse(localStorage.getItem('phone')) ?? ''
   );
 
   const handleInputChange = event => {
@@ -24,9 +24,9 @@ const ContactForm = () => {
         setName(value);
         break;
 
-      case 'number':
-        localStorage.setItem('number', JSON.stringify(value));
-        setNumber(value);
+      case 'phone':
+        localStorage.setItem('phone', JSON.stringify(value));
+        setphone(value);
         break;
 
       default:
@@ -45,15 +45,15 @@ const ContactForm = () => {
       return;
     }
 
-    const contact = { id: nanoid(), name, number };
+    const contact = { id: nanoid(), name, phone };
 
     dispatch(addContactToStore(contact));
     //contact in actions in slice - is payload
     localStorage.removeItem('name');
-    localStorage.removeItem('number');
+    localStorage.removeItem('phone');
 
     setName('');
-    setNumber('');
+    setphone('');
   };
 
   return (
@@ -76,15 +76,15 @@ const ContactForm = () => {
 
         <input
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          value={number}
+          title="Phone phone must be digits and can contain spaces, dashes, parentheses and can start with +"
+          value={phone}
           onChange={handleInputChange}
           required
         />
       </label>
-      <button className={css.button} type="submit" disabled={!name || !number}>
+      <button className={css.button} type="submit" disabled={!name || !phone}>
         Add contact
       </button>
     </form>
