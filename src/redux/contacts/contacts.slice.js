@@ -1,47 +1,43 @@
-import { contactsInitState } from './contacts.init-state';
+import { contactsInitialState } from './contacts.initialState';
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addContact,
+  addContactToStore,
   deleteContactFromStore,
-  getContacts,
+  getContactsFromStore,
 } from './contacts.thunk';
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: contactsInitState,
+  initialState: contactsInitialState,
 
   extraReducers: builder => {
     builder
-      .addCase(getContacts.pending, state => {
+      .addCase(getContactsFromStore.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getContacts.fulfilled, (state, { payload }) => {
+      .addCase(getContactsFromStore.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.error = null;
         state.items = payload;
       })
-      .addCase(getContacts.rejected, (state, { payload }) => {
+      .addCase(getContactsFromStore.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
       })
 
-      .addCase(addContact.fulfilled, (state, { payload }) => {
+      .addCase(addContactToStore.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.items.push(payload);
       })
-      .addCase(addContact.rejected, (state, { payload }) => {
+      .addCase(addContactToStore.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
       })
 
       .addCase(deleteContactFromStore.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.error = null;
+
         state.items = state.items.filter(({ id }) => id !== payload);
       })
       .addCase(deleteContactFromStore.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload;
       });
   },
 });

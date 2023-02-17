@@ -1,4 +1,4 @@
-import { contactsInitialState } from './contacts/contacts.init-state';
+import { contactsInitialState } from './contacts/contacts.initialState';
 import { configureStore } from '@reduxjs/toolkit';
 import { contactsReducer } from './contacts/contacts.slice';
 import { filterReducer } from './filter/filter.slice';
