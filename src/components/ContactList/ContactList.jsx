@@ -4,11 +4,7 @@ import { getContactsFromStore } from 'redux/contacts/contacts.thunk';
 
 import ContactItem from 'components/ContactItem/ContactItem';
 import Loader from 'components/Loader/Loader';
-import {
-  selectError,
-  selectFilteredContacts,
-  selectIsLoading,
-} from '../../redux/selectors';
+import { selectFilteredContacts, selectIsLoading } from '../../redux/selectors';
 
 const ContactList = () => {
   const dispatch = useDispatch();
